@@ -1,0 +1,117 @@
+﻿<Window x:Class="UIApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UIApplication"
+        mc:Ignorable="d"
+        Icon="Assets/Icons/icons8-developer-64.png"
+        WindowStyle="None" WindowStartupLocation="CenterScreen" WindowState="Normal"
+        AllowsTransparency="True"
+        Title="MainWindow" Height="450" Width="800"
+        MinHeight="{Binding MinHeight}" MinWidth="{Binding MinWidth}">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type local:MainWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <!--// Outer Margin Border //-->
+                        <Border Background="Transparent" Padding="{Binding OuterMarginSize}">
+                            <Grid>
+                                <!--// Main Content Border - Border to snap main content //-->
+                                <Border  x:Name="ContainerBorder" Background="{StaticResource BackgroundLightBrush}" CornerRadius="{Binding CornerRadius}" />
+                                <!--// Main Content Border - Border containing Grid //-->
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="1" Opacity="0.2" />
+                                    </Border.Effect>
+                                    <!--// Main Content Grid //-->
+                                    <Grid >
+
+                                        <Grid.OpacityMask>
+                                            <VisualBrush Visual="{Binding ElementName=ContainerBorder}" />
+                                        </Grid.OpacityMask>
+                                        <!--// Main Window Lowest Level Roles //-->
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="35" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <!--// Tittle Bar Row //-->
+                                        <Grid Grid.Row="0">
+                                            <!--// Tittle Bar Columns //-->
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--// Icon Grid //-->
+                                            <Grid Grid.Column="0">
+                                                <Button Style="{StaticResource AppIcon}">
+                                                    <Image Source="Assets/Icons/icons8-developer-64.png" />
+                                                </Button>
+                                            </Grid>
+
+                                            <!--// Application Tittle Column //-->
+                                            <Grid Grid.Column="1">
+                                                <Viewbox>
+                                                    <TextBlock Text="Chat Meet" />
+                                                </Viewbox>
+                                            </Grid>
+
+                                            <!--// Application Command Buttons //-->
+                                            <Grid Grid.Column="2">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Content="_" Style="{StaticResource CaptionCmdBtn}" Command="{Binding Minimize}" />
+                                                    <Button Content="[ ]" Style="{StaticResource CaptionCmdBtn}" Command="{Binding Maximize}" />
+                                                    <Button Content="x" Style="{StaticResource CaptionCmdCloseBtn}" Command="{Binding Close}" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </Grid>
+
+                                        <!--// Drop Shadow Row //-->
+                                        <Grid Grid.Row="1" >
+                                            <Border BorderThickness="0 0.2 0 0" Height="3">
+                                                <Border.BorderBrush>
+                                                    <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                                        <GradientStop Color="AntiqueWhite" Offset="0.0" />
+                                                        <GradientStop Color="AliceBlue" Offset="0.5" />
+                                                        <GradientStop Color="AntiqueWhite" Offset="1.0" />
+                                                    </LinearGradientBrush>
+                                                </Border.BorderBrush>
+
+                                                <Border.Background>
+                                                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                                                        <GradientStop Color="Green" Offset="0.0" />
+                                                        <GradientStop Color="Beige" Offset="1.0" />
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+                                            </Border>
+                                        </Grid>
+
+                                        <!--// Content //-->
+                                        <Grid Grid.Row="2">
+
+                                        </Grid>
+
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+            CornerRadius="{Binding CornerRadius}"
+            ResizeBorderThickness="{Binding ResizeBorderThickness}"
+            CaptionHeight="{Binding CaptionHeight}" />
+    </WindowChrome.WindowChrome>
+
+</Window>
